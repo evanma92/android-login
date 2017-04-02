@@ -34,10 +34,6 @@ public class PosixActivity extends AppCompatActivity {
     private EditText userPassword;
     private Button login;
     private Button register;
-    private TextView result;
-    private TextView searchedUser;
-    private TextView searchedPass;
-    private TextView userInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +44,15 @@ public class PosixActivity extends AppCompatActivity {
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
+        /*
+            Creates a register button:
+            1) On click, the app gets the username and password and puts them in a string
+            2) Then we check whether the user has input his/her username
+                a) If not, we ask the user to input his/her username (using a snackbar)
+            3) Then we check whether the password is of length 8 or more
+                a) If not, we ask the user to input again (using a snackbar)
+            4) If all the above conditions are met, we save the userdata
+         */
         register = (Button) findViewById(R.id.RegisterButton);
         register.setOnClickListener(new View.OnClickListener() {
 
@@ -74,6 +79,19 @@ public class PosixActivity extends AppCompatActivity {
             }
         });
 
+
+        /*
+            Creates a login button:
+            1) On click, the app gets the username and password and puts them in a string
+            2) Then we hash it to get the hashed password (hash_pw)
+            3) Next we read the data from file
+            4) We then check the username and password accordingly by
+                a) Splitting up the data into two components
+                b) Checking for equality
+            5) If login is successful, then we create a new intent and launch a new activity
+               called DisplayMessageActivity, which displays a welcome message to the user
+               a) Else we ask the user to register or input their username/password again (by the Snackbar)
+         */
         login = (Button) findViewById(R.id.Login);
         login.setOnClickListener(new View.OnClickListener() {
 
@@ -83,8 +101,6 @@ public class PosixActivity extends AppCompatActivity {
                 try {
                     userPassword = (EditText) findViewById(R.id.Password);
                     userName = (EditText) findViewById(R.id.UserName);
-                    searchedUser = (TextView) findViewById(R.id.searchedUser);
-                    searchedPass = (TextView) findViewById(R.id.searchedPass);
 
                     String username = userName.getText().toString();
                     String pw = userPassword.getText().toString();
@@ -92,9 +108,6 @@ public class PosixActivity extends AppCompatActivity {
 
                     String userdata = readUserData();
 
-                    PosixActivity.this.result.setText(userdata);
-                    PosixActivity.this.searchedUser.setText(userdata.substring(0, username.length()));
-                    PosixActivity.this.searchedPass.setText(userdata.substring(username.length()));
                     if (username.equals(userdata.substring(0, username.length()))
                             && hashed_pw.equals(userdata.substring(username.length()))) {
 
@@ -197,12 +210,6 @@ public class PosixActivity extends AppCompatActivity {
         FileOutputStream outputStream;
         final String hashed_password = md5(password);
 
-        /*
-            Just to test whether the password is hashed correctly.
-         */
-        this.result = (TextView) findViewById(R.id.result);
-        this.result.setText(hashed_password);
-
         try {
             outputStream = openFileOutput(this.filename, 0);     // 0 Sets the file to private so that other apps may not access this data
             outputStream.write(username.getBytes());
@@ -213,6 +220,9 @@ public class PosixActivity extends AppCompatActivity {
         }
     }
 
+    /*
+        md5 algorithm to hash the password
+     */
     public static final String md5(final String s) {
         final String MD5 = "MD5";
         try {

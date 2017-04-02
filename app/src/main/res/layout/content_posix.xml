@@ -23,36 +23,6 @@
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/searchedPass"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="searchedPassword" />
-
-                    <TextView
-                        android:id="@+id/searchedUser"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="searchedUsername" />
-
-                    <TextView
-                        android:id="@+id/result"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Result" />
-                </LinearLayout>
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <EditText
@@ -114,15 +84,6 @@
 
             </TableRow>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <TextView
-                    android:id="@+id/userInfo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </TableRow>
         </TableLayout>
 
     </LinearLayout>
