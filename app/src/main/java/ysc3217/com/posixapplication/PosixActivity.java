@@ -67,6 +67,12 @@ public class PosixActivity extends AppCompatActivity {
                     if (username.length() < 1) {
                         Snackbar.make(view, "Please input your username", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
+
+                        Intent intent = new Intent(PosixActivity.this, DisplayMessageActivity.class);
+
+                        String message = "Cannot Create the Account";
+                        intent.putExtra(PosixActivity.WELCOME_MESSAGE, message);
+                        startActivity(intent);
                     } else if (password.length() < 8) {
                         Snackbar.make(view, "Please input a password of at least 8 characters long", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
@@ -79,12 +85,16 @@ public class PosixActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(PosixActivity.this, DisplayMessageActivity.class);
 
-                        String message = "Registration Successful!";
+                        String message = "Account Successfully Created!";
                         intent.putExtra(PosixActivity.WELCOME_MESSAGE, message);
                         startActivity(intent);
                     }
                 } catch (NullPointerException npe){
-                    npe.printStackTrace();
+                    Intent intent = new Intent(PosixActivity.this, DisplayMessageActivity.class);
+
+                    String message = "Cannot Create the Account";
+                    intent.putExtra(PosixActivity.WELCOME_MESSAGE, message);
+                    startActivity(intent);
                 }
             }
         });
@@ -126,13 +136,16 @@ public class PosixActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(PosixActivity.this, DisplayMessageActivity.class);
 
-                        String message = String.format("Hi there, %s!", username);
+                        String message = "Login Successful";
                         intent.putExtra(PosixActivity.WELCOME_MESSAGE, message);
                         startActivity(intent);
 
                     } else {
-                        Snackbar.make(view, "Incorrect Username or Password. Have you registered with us?", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
+                        Intent intent = new Intent(PosixActivity.this, DisplayMessageActivity.class);
+
+                        String message = "Username or password incorrect";
+                        intent.putExtra(PosixActivity.WELCOME_MESSAGE, message);
+                        startActivity(intent);
                     }
                 } catch (NullPointerException npe){
                     npe.printStackTrace();
