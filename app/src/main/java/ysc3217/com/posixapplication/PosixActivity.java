@@ -76,6 +76,12 @@ public class PosixActivity extends AppCompatActivity {
                         userPassword.setText("");
                         Snackbar.make(view, "Registration Successful!", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
+
+                        Intent intent = new Intent(PosixActivity.this, DisplayMessageActivity.class);
+
+                        String message = "Registration Successful!";
+                        intent.putExtra(PosixActivity.WELCOME_MESSAGE, message);
+                        startActivity(intent);
                     }
                 } catch (NullPointerException npe){
                     npe.printStackTrace();
